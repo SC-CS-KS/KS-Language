@@ -1,12 +1,4 @@
 
-# 编程范式
-## OOP
-## AOP
-## 并发编程
-## 事件驱动编程
-## 函数式编程
-## 响应式编程
-
 # [描述性语言 Descriptive Language](_DL/README.md)
 
 ## [Data Description Language 数据描述语言](_DL/DDL/README.md)
