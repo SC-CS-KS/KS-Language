@@ -1,0 +1,12 @@
+3 个主流 PHP 框架的性能测试
+http://blog.jobbole.com/100345/#comment-157730
+
+性能上：phalcon > yii ≈ laravel，因为phalcon使用C语言开发，以php扩展的方式加载，
+这样不需要对框架进行额外的解析和执行，所以性能好。
+但同时也降低了框架的可控性，框架层面出现bug不好排查，不懂C语言和php扩展开发很难修复。
+
+代码的可读性上来说，laravel更胜一筹。(表现力较强，不懂php基本也能看懂他在做什么)
+但从开发速度上来说，yii ≥ laravel > phalcon。
+从学习成本、使用成本：yii ≥ laravel > phalcon。
+综合上述：yii以微弱的优势领先，推荐yii。
+

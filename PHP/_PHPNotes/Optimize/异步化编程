@@ -1,0 +1,14 @@
+React
+Event-driven, non-blocking I/O with PHP.
+https://github.com/reactphp/react
+
+http://www.csdn.net/article/2015-10-12/2825887
+--------------------------------------------------------------------------------------------------
+
+PHP异步编程简述
+http://www.huyanping.cn/php%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0/
+
+--------------------------------------------------------------------------------------------------
+php处理耗时任务，提高页面响应速度
+http://www.madeby83.com/php%E5%A4%84%E7%90%86%E8%80%97%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%8C%E6%8F%90%E9%AB%98%E9%A1%B5%E9%9D%A2%E5%93%8D%E5%BA%94%E9%80%9F%E5%BA%A6.html
+fastcgi_finish_request

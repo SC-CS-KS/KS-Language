@@ -1,0 +1,21 @@
+整体来说yii的确是一个很好的平衡:
+1.自动化crud，让你在有了数据建模之后，瞬间完成界面。
+2.layout等view的布局模式，让你可以轻松区块化。
+3.灵活的widget机制，重用区块也很方便，这次电商系统页面上复杂的广告位就通过这个来实现的。
+4.模块的提供，能让几个团队在同一个项目中轻松分割代码。（运营的活动，都是另外一个开发团队在几个模块先单独去开发的）
+5.url manager 的规则，能将一个controller变换成任意客户需要的url link 格式（一开始客户要xxx/product-111.html 后来要xxx/p/111.html最后要xxx/111.html）
+6.缓存、session等封装，让你轻松在redis 文件缓存，数据库等之间切换
+7.强大的log系统，不同级别的日志，方便trace问题
+8.验证部分可能见仁见智，但是对于初期，良好的model+validate的封装，可以重用前端js和后端PHP层的验证，而表单提交的验证，也是最复杂的部分，相对就简化了
+9.主题功能，通过不同主题，实现了一期二期的迅速迭代开发。同时也实现了pc版和移动版
+10.性能方面，通过opcache，实际上并不慢，可以想见php7支持后，性能仍然可以提高一个层次。
+千万pv到亿级pv而言，也能撑住，当然如果有这么大的量，您可以选择任何技术架构了。
+
+
+
+Behaviors & events
+These features provide endless possibilities and unbelievable flexibility, but as current documentation does not give more than a few examples, it might be difficult to fully understand their internals and requirements.
+
+It should be noted that they do mostly the same thing. You can attach behaviors and event handlers to components to modify the components' behavior.
+
+http://www.yiiframework.com/wiki/44/behaviors-events

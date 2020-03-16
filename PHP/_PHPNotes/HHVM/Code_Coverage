@@ -1,0 +1,70 @@
+现有覆盖率工具现状：
+1）原有php覆盖率统计工具xcache无法使用。xcache底层使用了xdebug，2.2的hhvm版本不支持xdebug（3.4的hhvm版本已支持了xdebug）
+2）phpunit4对hhvm环境下覆盖率统计实现了php_coverage工具，可以统计到单测覆盖率，但无法统计所有测试的覆盖率
+3）查看phpunit中单测覆盖率统计的实现，发现使用了一个fb_get_code_coverage的方法，这是hhvm框架中实现的，类似于xdebug_get_code_coverage，由此，可以用来统计hhvm环境下的覆盖率。
+具体实现：
+1）几个主要方法
+fb_enable_code_coverage()    //开始覆盖率统计
+fb_get_code_coverage(TRUE)   //获取覆盖率数据
+fb_disable_code_coverage()   //结束覆盖率统计
+2）具体实现
+插桩：在代码中增加上述几个方法，odp框架下，各app的代码入口均在webroot/index.php，因此可以在index.php文件中增加上面三个方法。为避免对于源码的过多改动，可以这几个方法写在一个文件中，index.php文件require进去即可。
+
+-------------------------------------------------------------------------------------------------
+运行环境是hhvm2.2（老架构）和hhvm3.0（新架构）
+底层原理：使用fb_get_code_coverage方法记录覆盖率实现，这是hhvm框架中实现的，由此，可以用来统计hhvm环境下的覆盖率。
+第三方封装包：vendor，获取:git archive --remote=ssh://taowen@icode.baidu.com:8235/baidu/personal-code/taowen-pae master thirdparty/phpunit/vendor/ |tar -x
+                      或者 wget get -r -nH --level=0 --cut-dirs=6 ftp://10.95.130.242:/home/work/taowen/pae_test/thirdparty/phpunit/vendor
+                     或者svn co https://svn.baidu.com/myspace/psqa/ae/thirdparty/phpunit/vendor
+注意事项：vendor内部会判断此本机的运行环境，来决定是使用hhvm还是xdebug的覆盖率策略，所以在autoload.php里面预定义了define("HHVM_VERSION","2.0.0");
+使用流程：
+1.插桩，在代码入口和出口分别插桩，AE使用的odp框架，在webroot下的index.php插桩即可
+ 伪代码为：
+ 
+//加载vendor工具包中的工具
+require_once __DIR__ . '/vendor/autoload.php';
+define('START_TIME_MS', intval(microtime(true)*1000));
+//调用工具包中的php_codeCoverage的接口
+$coverage = new PHP_CodeCoverage;
+//启动覆盖率
+$coverage->start('<name of test>');
+ 
+# 如入口代码段以及其他逻辑 Bd_Init::init()->bootstrap()->run();
+......
+//coverage代码
+$coverage->stop();
+$time=date("Y-m-d-H:i:s");
+$xmlOut=sprintf('tmp/%s-clover.xml',$time);
+$htmlOut=sprintf('tmp/%s-report',$time);
+$covOut=sprintf('tmp/%s-result.cov',$time);
+$writer = new PHP_CodeCoverage_Report_Clover;
+$writer->process($coverage, $xmlOut);
+$writer = new PHP_CodeCoverage_Report_HTML;
+$writer->process($coverage, $htmlOut);
+$writer = new PHP_CodeCoverage_Report_PHP;
+$writer->process($coverage, $covOut);
+2.发送ft验证
+3.收集覆盖率数据，merge（vendor会根据一条访问产生一个覆盖率文件）
+ 
+代码参考：
+echo "====================FETCH TEST ENV===================="
+cd $WORKSPACE
+svn co https://svn.baidu.com/myspace/psqa/ae pae_test
+cd pae_test && source setup.sh
+echo "====================CLEAR REPORT===================="
+cd $WORKSPACE/pae_test/function_test && rm report.html
+cd $WORKSPACE && rm -rf merge_result.xml merge_result_html
+echo "====================pitching pile===================="
+cd $WORKSPACE/pae_test/express_tool && sh hhvm_ft_cov.sh pae_start $WORKSPACE
+echo "====================FUNCTION TEST===================="
+#cd $WORKSPACE/pae_test/function_test && sh func_test_with_retry.sh
+cd $WORKSPACE/pae_test/function_test
+#/home/work/search/pae/php/bin/phptest --bootstrap=$FT_HOME/bootstrap.php ./module_test> test_result
+/home/work/tools/odp/php/bin/phptest --bootstrap=$FT_HOME/bootstrap.php ./module_test> test_result
+rm report.html
+python ../tool/gen_html_report.py -i test_result -t table -o report.html
+func_flag=$?
+echo "====================merge ft cov result===================="
+cd $WORKSPACE/pae_test/express_tool && sh hhvm_ft_cov.sh pae_stop $WORKSPACE
+ 
+使用实例：http://se.ps.jenkins.baidu.com/job/pae_se_ft_check_with_cov

@@ -1,0 +1,23 @@
+HHVM
+http://man.baidu.com/inf/hhvm/
+
+
+https://github.com/facebook/hhvm
+https://docs.hhvm.com/hhvm/basic-usage/introduction
+
+
+
+PSOP
+HHVM
+http://wiki.baidu.com/pages/viewpage.action?pageId=107299336
+
+
+hiphop原理分析
+http://saiyaren.iteye.com/blog/1888973
+
+HHVM 中的 RepoAuthoritative 模式
+http://leonax.net/p/7810/repo-authoritative-mode-in-hhvm/
+而 HHVM 则更进了一步，在 RepoAuthoritative 开启之后，指定的文件夹会被编译成一个二进制文件，并同时进行优化。官方说法是，这样的优化可以在 HHVM 本身的基础上，再提升 20% 的运行效率。
+
+
+http://gitlab.baidu.com/hhvm/hhvm-ext-conf/blob/master/build.sh

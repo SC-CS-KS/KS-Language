@@ -1,0 +1,21 @@
+php mysql转义特殊字符的函数 
+　　一个是：mysql_escape_string 
+　　一个是：addslashes 
+
+　　mysql_escape_string与addslashes的区别在于 
+　　mysql_escape_string总是将“’”转换成“\’” 
+
+　　而addslashes 
+　　在magic_quotes_sybase=on时将“’”转换成“”” 
+　　在magic_quotes_sybase=off时将“’”转换成“\’” 
+
+　　php，就提供了一些函数，使你的查询语句符合你的要求，比如mysql_escape_string 
+
+引用一个字符串，并返回一个结果，该结果可作为一个适当转义过的数据值在一个 SQL语句中使用。
+字符串被单引号包围着返回，并且在该字符串中每个单引号(“’”)、反斜线符号(“\”)、ASCII NUL 
+和 Control-Z 出现的地方，在该字符之前均被加上了一个反斜线。
+如果参数是 NULL，那么结果值是一个没有单引号包围的单词 “NULL”。 
+QUOTE 函数在 MySQL 4.0.3 中被加入。 
+
+在往数据库里写数据的时候, 有时要写入的字符串中包含了一些特殊的字符,
+如 ‘,”,/,%等,不知道mysql本身有没有这种转义的函数,不是那些api. 

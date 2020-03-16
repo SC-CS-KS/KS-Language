@@ -1,0 +1,4 @@
+http://docs.phpcomposer.com/00-intro.html
+https://github.com/5-say/composer-doc-cn
+
+Composer 是 PHP 的一个依赖管理工具。它允许你申明项目所依赖的代码库，它会在你的项目中为你安装他们。

@@ -1,0 +1,10 @@
+Understanding PhpSpec
+http://code.tutsplus.com/tutorials/understanding-phpspec--cms-21915
+If you compare PhpSpec to other testing frameworks, you will find that it is a very sophisticated and opinionated tool. One of the reasons for this, is that PhpSpec is not a testing framework like the ones you already know. 
+
+Instead, it is a design tool that helps describing behavior of software. A side effect of describing the behavior of software with PhpSpec, is that you will end up with specs that will also serve as tests afterwards.
+
+In this article, we will take a look under the hood of PhpSpec and try to gain a deeper understanding of how it works and how to use it.
+
+If you want to brush up on phpspec, take a look at my getting started tutorial.
+（http://code.tutsplus.com/tutorials/getting-started-with-phpspec--cms-20919）

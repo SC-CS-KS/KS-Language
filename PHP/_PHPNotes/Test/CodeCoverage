@@ -1,0 +1,19 @@
+hhvm.code_coverage_output_file
+
+php-code-coverage
+https://github.com/sebastianbergmann/php-code-coverage
+https://thephp.cc/news/2015/08/phpunit-4-8-code-coverage-support
+
+
+查看phpunit中单测覆盖率统计的实现，发现使用了一个 fb_get_code_coverage 的方法，
+这是hhvm框架中实现的，类似于xdebug_get_code_coverage，由此，可以用来统计hhvm环境下的覆盖率。
+具体实现：
+1）几个主要方法
+fb_enable_code_coverage()    //开始覆盖率统计
+fb_get_code_coverage(TRUE)   //获取覆盖率数据
+fb_disable_code_coverage()   //结束覆盖率统计
+
+2）具体实现
+插桩：在代码中增加上述几个方法，odp框架下，各app的代码入口均在webroot/index.php，
+因此可以在index.php文件中增加上面三个方法。为避免对于源码的过多改动，
+可以这几个方法写在一个文件中，index.php文件require进去即可。

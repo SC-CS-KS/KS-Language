@@ -1,0 +1,25 @@
+
+
+
+
+
+
+
+收集整理一些常用的PHP类库, 资源以及技巧
+https://github.com/JingwenTian/awesome-php?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io
+
+PHP并发IO编程之路
+http://www.tuicool.com/articles/J7zY3yU
+
+http://www.php-fig.org/psr
+
+
+--------------------------------------------------------------------------------------
+Install:
+./configure --prefix=/home/users/chenguang02/x86_64/php5_6 \
+	--with-config-file-path=/usr/php/etc --enable-xml --disable-rpath \
+	--enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization \
+	--with-curl --enable-mbregex --enable-fpm --enable-mbstring  --with-gd \
+	--enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets \
+	--with-xmlrpc --enable-zip --enable-soap --enable-opcache --with-pdo-mysql \
+	--enable-maintainer-zts
